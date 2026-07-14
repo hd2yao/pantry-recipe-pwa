@@ -326,7 +326,7 @@
 }
 
 .button--small {
-  min-height: 40px;
+  min-height: 44px;
   padding: 0 var(--space-3);
   border-radius: var(--radius-sm);
 }
@@ -349,7 +349,7 @@
 }
 
 .filter-chip {
-  min-height: 40px;
+  min-height: 44px;
   flex: 0 0 auto;
   padding: 0 var(--space-3);
   color: var(--color-text-muted);
@@ -755,15 +755,15 @@
 
 .platform-link span {
   font-size: 0.72rem;
-  opacity: 0.78;
+  opacity: 0.88;
 }
 
 .platform-link--xhs {
-  background: #d94a4a;
+  background: #b73d45;
 }
 
 .platform-link--bili {
-  background: #287e9d;
+  background: #236b85;
 }
 
 .platform-link:disabled {
@@ -926,8 +926,8 @@
 
 .toast button {
   display: grid;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   flex: 0 0 auto;
   place-items: center;
   color: #fff;

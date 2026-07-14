@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 type ConfirmDialogProps = {
   title: string;
   description: string;
@@ -52,4 +54,3 @@ export function ConfirmDialog({
     </div>
   );
 }
-import { useEffect, useRef } from 'react';

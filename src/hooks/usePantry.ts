@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import type { AddPantryItemInput, ConsumeItemsInput, PantrySnapshot } from '../domain/types';
 import { addPantryItem, consumeItems, createEmptySnapshot } from '../domain/pantry';
-import { loadSnapshot, saveSnapshot } from '../storage/pantryStorage';
-import { exportSnapshot, importSnapshot } from '../storage/pantryStorage';
+import { exportSnapshot, importSnapshot, loadSnapshot, saveSnapshot } from '../storage/pantryStorage';
 
 function readInitialSnapshot() {
   try {

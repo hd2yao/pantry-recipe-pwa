@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 type ToastProps = {
   message: string;
   onDismiss: () => void;
@@ -18,4 +20,3 @@ export function Toast({ message, onDismiss }: ToastProps) {
     </div>
   );
 }
-import { useEffect } from 'react';
