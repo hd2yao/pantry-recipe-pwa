@@ -244,8 +244,10 @@ it('禁用超过库存的消耗提交', async () => {
 
 **文件：**
 
+- 创建：`.github/workflows/deploy-pages.yml`
 - 创建：`docs/browser-acceptance.md`
 - 创建：`docs/visual-acceptance.md`
+- 修改：`vite.config.ts`
 - 修改：`README.md`
 
 **Playwright CLI 验收场景：**
@@ -265,8 +267,9 @@ it('禁用超过库存的消耗提交', async () => {
 4. 分别以 375×812、768×1024、1440×1000 截图首页、库存和菜谱页。
 5. 检查无横向滚动、固定底栏不遮挡内容、最长文本不裁切。
 6. 在 `docs/visual-acceptance.md` 记录 revision、URL、视口、截图和评分。
-7. 完善中文 README：功能、安装、手机添加主屏幕、数据边界、开发和部署。
-8. 运行最终门禁：
+7. 配置 GitHub Pages 工作流和仓库子路径，分别验证本地根路径构建与 Pages 子路径构建。
+8. 完善中文 README：功能、安装、手机添加主屏幕、数据边界、开发和部署。
+9. 运行最终门禁：
 
    ```bash
    npm run test:run
@@ -275,8 +278,8 @@ it('禁用超过库存的消耗提交', async () => {
    git diff --check
    ```
 
-9. 提交：`docs: add usage and verification guide`。
-10. 推送 `main`，验证 GitHub 仓库可见性和远端状态。
+10. 提交：`docs: add usage and verification guide`。
+11. 推送 `main`，验证 GitHub 仓库可见性、Pages 工作流和线上地址。
 
 ## 收敛检查
 
