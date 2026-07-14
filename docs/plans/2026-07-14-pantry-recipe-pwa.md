@@ -6,7 +6,7 @@
 
 **架构：** React 页面只负责交互和展示，库存规则集中在无副作用的 TypeScript 领域模块，本地存储通过独立适配层读写带版本号的数据快照。应用不接后端；PWA service worker 缓存应用壳，第三方菜谱只通过官方搜索 URL 打开。
 
-**技术栈：** React、TypeScript、Vite、Vitest、Testing Library、Playwright、vite-plugin-pwa、原生 CSS、localStorage。
+**技术栈：** React、TypeScript、Vite、Vitest、Testing Library、Playwright CLI、vite-plugin-pwa、原生 CSS、localStorage。
 
 ---
 
@@ -23,14 +23,14 @@
 
 | 验收标准 | 实现任务 | 验证 |
 |---|---|---|
-| AC-001 新增并持久化食材 | Task 2、3、5 | 领域测试、存储测试、Playwright |
-| AC-002 消耗并生成记录 | Task 2、6 | 领域测试、组件测试、Playwright |
+| AC-001 新增并持久化食材 | Task 2、3、5 | 领域测试、存储测试、Playwright CLI |
+| AC-002 消耗并生成记录 | Task 2、6 | 领域测试、组件测试、Playwright CLI |
 | AC-003 保鲜优先级 | Task 2、5 | 固定日期单元测试、页面断言 |
 | AC-004 平台菜谱搜索 | Task 2、6 | URL 单元测试、浏览器新窗口断言 |
-| AC-005 数据导入导出 | Task 3、7 | 存储测试、浏览器流程测试 |
+| AC-005 数据导入导出 | Task 3、7 | 存储测试、Playwright CLI |
 | AC-006 PWA 与离线应用壳 | Task 4、8 | production preview、manifest/service worker 检查 |
 | AC-007 响应式和触控尺寸 | Task 5、6、8 | 375/768/1440 截图和几何检查 |
-| AC-008 自动化覆盖 | Task 2、3、5、6、8 | `npm test`、`npm run test:e2e` |
+| AC-008 自动化覆盖 | Task 2、3、5、6、8 | `npm run test:run`、Playwright CLI 验收记录 |
 
 ### Task 1：初始化 React、测试和代码质量工具
 
@@ -52,8 +52,8 @@
 **步骤：**
 
 1. 使用 Vite React TypeScript 模板生成基础文件，不覆盖已有 Git 历史和文档。
-2. 安装 `vitest`、Testing Library、`jsdom`、Playwright 和 `vite-plugin-pwa`。
-3. 在 `package.json` 增加 `test`、`test:run`、`test:e2e`、`lint`、`build` 和 `preview` 命令。
+2. 安装 `vitest`、Testing Library、`jsdom` 和 `vite-plugin-pwa`；浏览器验收使用本机 Playwright CLI wrapper。
+3. 在 `package.json` 增加 `test`、`test:run`、`lint`、`build` 和 `preview` 命令。
 4. 写最小 App 冒烟测试，断言页面标题可见。
 5. 运行 `npm run test:run`，预期先因页面未实现而失败。
 6. 实现最小页面后再次运行，预期通过。
@@ -240,33 +240,28 @@ it('禁用超过库存的消耗提交', async () => {
 6. 运行全部测试、lint 和 build。
 7. 提交：`feat: add data backup and accessibility`。
 
-### Task 8：端到端验证、截图和项目文档
+### Task 8：真实浏览器验证、截图和项目文档
 
 **文件：**
 
-- 创建：`playwright.config.ts`
-- 创建：`tests/e2e/pantry.spec.ts`
+- 创建：`docs/browser-acceptance.md`
 - 创建：`docs/visual-acceptance.md`
 - 修改：`README.md`
 
-**端到端场景：**
+**Playwright CLI 验收场景：**
 
-```ts
-test('买入、消耗、刷新和菜谱搜索', async ({ page }) => {
-  await page.goto('/');
-  await page.getByRole('button', { name: '买了什么' }).click();
-  // 填写番茄并提交
-  await page.reload();
-  await expect(page.getByText('番茄')).toBeVisible();
-  // 消耗后断言剩余数量，并验证菜谱搜索链接关键词
-});
+```text
+打开首次空状态 -> 新增番茄 -> 刷新确认持久化
+-> 新增鸡蛋 -> 消耗番茄和鸡蛋 -> 确认剩余数量
+-> 进入菜谱页 -> 选择库存 -> 核对两个平台链接关键词
+-> 导出备份 -> 清空/导入 -> 核对恢复结果
 ```
 
 **步骤：**
 
-1. 配置 Playwright 自动启动 production preview。
-2. 编写首次空状态、买入、消耗、刷新持久化、菜谱链接和备份流程。
-3. 运行 `npm run test:e2e`，修复真实交互问题。
+1. 启动 production preview，记录启动时间、源码 revision 和 URL。
+2. 使用 Playwright CLI 的 `open -> snapshot -> interact -> snapshot` 流程验收首次空状态、买入、消耗、刷新持久化、菜谱链接和备份。
+3. 把操作、关键 DOM 结果和失败修复记录到 `docs/browser-acceptance.md`。
 4. 分别以 375×812、768×1024、1440×1000 截图首页、库存和菜谱页。
 5. 检查无横向滚动、固定底栏不遮挡内容、最长文本不裁切。
 6. 在 `docs/visual-acceptance.md` 记录 revision、URL、视口、截图和评分。
@@ -275,7 +270,6 @@ test('买入、消耗、刷新和菜谱搜索', async ({ page }) => {
 
    ```bash
    npm run test:run
-   npm run test:e2e
    npm run lint
    npm run build
    git diff --check
@@ -291,4 +285,3 @@ test('买入、消耗、刷新和菜谱搜索', async ({ page }) => {
 - `npm audit` 的生产依赖风险需要检查；无法立即修复时记录原因。
 - 本地存储边界、食品安全提示和第三方平台依赖必须在 README 明示。
 - 视觉评分低于 90 或出现溢出、重叠、遮挡时进入最多五轮的最小修复循环。
-
