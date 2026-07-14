@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { AddPantryItemInput, ConsumeItemsInput, PantrySnapshot } from '../domain/types';
 import { addPantryItem, consumeItems, createEmptySnapshot } from '../domain/pantry';
 import { loadSnapshot, saveSnapshot } from '../storage/pantryStorage';
+import { exportSnapshot, importSnapshot } from '../storage/pantryStorage';
 
 function readInitialSnapshot() {
   try {
@@ -37,6 +38,19 @@ export function usePantry() {
     addItem: (input: AddPantryItemInput) => commit(addPantryItem(snapshot, input)),
     consume: (input: ConsumeItemsInput) => commit(consumeItems(snapshot, input)),
     replaceSnapshot: commit,
+    exportData: () => exportSnapshot(snapshot),
+    importData: (serialized: string) => {
+      try {
+        const imported = importSnapshot(serialized);
+        setSnapshot(imported);
+        setError(null);
+      } catch (importError) {
+        const message = importError instanceof Error ? importError.message : '导入失败';
+        setError(message);
+        throw importError;
+      }
+    },
+    clearData: () => commit(createEmptySnapshot()),
     clearError: () => setError(null),
   };
 }
