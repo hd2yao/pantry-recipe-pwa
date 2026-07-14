@@ -563,6 +563,216 @@
   border-radius: var(--radius-sm);
 }
 
+.sr-only {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.consume-list {
+  display: grid;
+  gap: var(--space-3);
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.consume-list legend {
+  margin-bottom: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  font-weight: 680;
+}
+
+.consume-row {
+  padding: var(--space-3);
+  background: var(--color-bg);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.consume-row--selected {
+  background: var(--color-primary-soft);
+  border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-line));
+}
+
+.consume-row__choice {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: var(--space-3);
+  cursor: pointer;
+}
+
+.consume-row__choice input,
+.ingredient-choice input {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  accent-color: var(--color-primary);
+}
+
+.consume-row__choice > span {
+  display: grid;
+  gap: 2px;
+}
+
+.consume-row__choice small {
+  color: var(--color-text-muted);
+}
+
+.consume-row__quantity {
+  display: grid;
+  grid-template-columns: minmax(80px, 120px) auto;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  padding-left: 32px;
+}
+
+.consume-row__quantity input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+}
+
+.consume-row__quantity > span {
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+}
+
+.consume-row__quantity > small {
+  grid-column: 1 / -1;
+  color: var(--color-overdue);
+  font-size: 0.72rem;
+}
+
+.recipe-panel,
+.search-preview {
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+}
+
+.recipe-panel h2,
+.recipe-panel p,
+.search-preview h2,
+.search-preview p {
+  margin-top: 0;
+}
+
+.recipe-panel h2,
+.search-preview h2 {
+  margin-bottom: 0;
+  font-size: 1.2rem;
+  letter-spacing: -0.025em;
+}
+
+.recipe-panel__intro {
+  margin-top: var(--space-2) !important;
+  margin-bottom: var(--space-5);
+  color: var(--color-text-muted);
+  font-size: 0.83rem;
+  line-height: 1.5;
+}
+
+.ingredient-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.ingredient-choice {
+  display: flex;
+  min-width: 0;
+  min-height: 64px;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  cursor: pointer;
+  background: var(--color-bg);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.ingredient-choice:has(input:checked) {
+  background: var(--color-primary-soft);
+  border-color: color-mix(in srgb, var(--color-primary) 42%, var(--color-line));
+}
+
+.ingredient-choice > span {
+  display: grid;
+  overflow: hidden;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ingredient-choice strong,
+.ingredient-choice small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ingredient-choice small {
+  color: var(--color-text-muted);
+}
+
+.platform-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.platform-link {
+  display: grid;
+  min-height: 82px;
+  align-content: center;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  color: #fff;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+}
+
+.platform-link span {
+  font-size: 0.72rem;
+  opacity: 0.78;
+}
+
+.platform-link--xhs {
+  background: #d94a4a;
+}
+
+.platform-link--bili {
+  background: #287e9d;
+}
+
+.platform-link:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+  opacity: 0.42;
+}
+
+.copy-status {
+  margin: var(--space-3) 0 0 !important;
+  color: var(--color-primary);
+  font-size: 0.76rem;
+}
+
 .error-banner {
   margin: 0 var(--space-4) var(--space-4);
 }
