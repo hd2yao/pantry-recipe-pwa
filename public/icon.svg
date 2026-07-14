@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">食材管家</title>
+  <rect width="512" height="512" rx="116" fill="#1f6b4f"/>
+  <path d="M132 208c0-35 29-64 64-64h120c35 0 64 29 64 64v150c0 28-22 50-50 50H182c-28 0-50-22-50-50V208Z" fill="#fffdf7"/>
+  <path d="M132 230h248" stroke="#1f6b4f" stroke-width="22"/>
+  <path d="M270 155c8-45 42-74 87-76-2 43-31 78-87 76Z" fill="#9bd08d"/>
+  <path d="M260 170c-3-37-28-66-67-78-7 40 15 72 67 78Z" fill="#d9e8a9"/>
+  <circle cx="256" cy="314" r="49" fill="#ef744f"/>
+  <path d="M235 268c7-18 35-18 42 0" stroke="#1f6b4f" stroke-width="14" stroke-linecap="round"/>
+</svg>
